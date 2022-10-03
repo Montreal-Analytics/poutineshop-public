@@ -2,16 +2,11 @@ version: 2
 
 models:
   - name: dim_products
-    description: >
-      One row per product available in the Poutine Shop
+    description: '{{ doc("dim_products") }}'
+    
+    
     columns:
-      - name: product_id
-        description: product unique identifier
-        tests:
-          - not_null
-          - unique
       - name: product_price
-        description: '{{ doc("production_products__product_price") }}'
       - name: product_category
         description: '{{ doc("ecommerce_backend_products__category") }}'
       - name: product_name
@@ -36,11 +31,7 @@ models:
         description: >
           The date and time when the product was order the very first time
       - name: product_recent_order_at
-        description: >
-          The date and time of the most recent purchase of the product
-        tests:
-          - dbt_utils.expression_is_true:
-              expression: ">= product_first_order_at"
+        description: The date and time of the most recent purchase of the product
       - name: total_units_sold_rank
         description: >
           Rank based on the total units sold. Rank will be 1 for products that

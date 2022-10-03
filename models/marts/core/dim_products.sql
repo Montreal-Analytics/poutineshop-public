@@ -1,13 +1,13 @@
 with stg_products as (
-    select * from {{ ref("stg_production__products") }}
+    SELECT * FROM {{ ref("stg_production__products") }}
 ),
 
 stg_order_items as (
-    select * from {{ ref("stg_transactions__order_items") }}
+    SELECT * FROM {{ ref("stg_transactions__order_items") }}
 ),
 
 product_full_name_mapping as (
-    select * from {{ ref('product_full_name_mapping') }}
+    SELECT * FROM {{ ref('product_full_name_mapping') }}
 ),
 
 agg_order_items as (
@@ -66,13 +66,13 @@ final as (
         )
         as product_retail_price_with_tax
 
-    from stg_products
-    left join agg_order_items
-        on stg_products.product_id = agg_order_items.product_id
-    left join product_full_name_mapping
-        on stg_products.product_id = product_full_name_mapping.product_id
-    left join product_price_mapping
-        on stg_products.product_id = product_price_mapping.product_id
+from stg_products
+left join agg_order_items
+on stg_products.product_id = agg_order_items.product_id
+left join product_full_name_mapping
+on stg_products.product_id = product_full_name_mapping.product_id
+left join product_price_mapping
+on stg_products.product_id = product_price_mapping.product_id
 )
 
 select * from final
