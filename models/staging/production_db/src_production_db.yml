@@ -1,0 +1,96 @@
+version: 2
+
+sources:
+  - name: production_db
+    database: poutineshop_raw_db
+    description: |
+      Data from production including customers, fulfillment, shops and products.
+    freshness:
+      warn_after: {count: 48, period: hour}
+    tables:
+      - name: customers
+        description: A table of all customers
+        columns:
+          - name: name
+            description: Customer name
+          - name: birthdate
+            description: Customer birthdate
+          - name: city
+            description: Customer city
+          - name: state
+            description: Customer state
+          - name: zipcode
+            description: Customer zipcode
+          - name: phone-number
+            description: Customer phone number
+          - name: email
+            description: Customer email
+          - name: gender
+            description: Customer gender
+          - name: customer_id
+            description: Customer unique identifier
+            tests:
+              - unique
+              - not_null
+
+      - name: fulfillment
+        description: A table of fulfillment information
+        columns:
+          - name: order_id
+            description: Order id
+            tests:
+              - not_null
+          - name: customer_id
+            description: Customer unique id
+          - name: created_at
+            description: Created at date
+          - name: event_id
+            description: Event unique id
+          - name: event_name
+            description: Fulfillment event name
+
+      - name: products
+        description: A table of products and their descriptions
+        columns:
+          - name: product_id
+            description: Unique product id
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: Product name
+          - name: cost
+            description: Cost of product
+          - name: description
+            description: Description of product
+          - name: size
+            description: Size of product
+          - name: type
+            description: Type of product
+
+      - name: shops
+        description: A table of poutine shops with location data.
+        columns:
+          - name: id
+            description: Unique shop id
+            tests:
+              - unique
+              - not_null
+          - name: address
+            description: Street address of the poutine shop
+          - name: city
+            description: City name of the poutine shop location
+          - name: province
+            description: |
+              Two character province code for the poutine shop location
+          - name: country
+            description: |
+              Two character country code for the poutine shop location
+          - name: postal_code
+            description: Postal code of the poutine shop location
+          - name: latitude
+            description: |
+              Latitude coordinates for the location of the poutine shop
+          - name: longitude
+            description: |
+              Longitude coordinates for the location of the poutine shop

@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: int_shop_orders_dimensionalized
+    description: '{{ doc("int_shop_orders_dimensionalized") }}'
+    columns:
+      - name: shop_id
+        description: '{{ doc("production__shop_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: first_order_created_at
+        description: '{{ doc("core_customers__first_order_created_at") }}'
+      - name: latest_order_created_at
+        description: '{{ doc("core_customers__latest_order_created_at") }}'
+      - name: order_count_rank
+        description: '{{ doc("int_orders__order_count_rank") }}'
+      - name: item_quantity_rank
+        description: '{{ doc("int_orders__item_quantity_rank") }}'
+      - name: customer_count_rank
+        description: '{{ doc("int_orders__customer_count_rank") }}'
+      - name: revenue_rank
+        description: '{{ doc("int_orders__revenue_rank") }}'
+      - name: order_count
+        description: '{{ doc("int_orders__order_count") }}'
+      - name: item_quantity
+        description: '{{ doc("int_orders__item_quantity") }}'
+      - name: customer_count
+        description: '{{ doc("int_orders__customer_count") }}'
+      - name: revenue
+        description: '{{ doc("int_orders__revenue") }}'

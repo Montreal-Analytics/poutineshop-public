@@ -1,0 +1,31 @@
+version: 2
+
+models:
+
+  - name: dim_customers
+    meta:
+      owner: "@data_team"
+      model_maturity: in dev
+    description: '{{ doc("dim_customers") }}'
+    columns:
+      - name: customer_id
+        description: '{{ doc("production__customer_id") }}'
+        tests:
+          - not_null
+          - unique
+      - name: first_order_created_at
+        description: '{{ doc("core_customers__first_order_created_at") }}'
+      - name: latest_order_created_at
+        description: '{{ doc("core_customers__latest_order_created_at") }}'
+      - name: customer_name
+        description: '{{ doc("production_customers__customer_name") }}'
+      - name: customer_gender
+        description: '{{ doc("production_customers__customer_gender") }}'
+      - name: count_orders
+        description: '{{ doc("core_customers__count_orders") }}'
+      - name: count_unique_events
+        description: '{{ doc("core_customers__count_unique_events") }}'
+      - name: sum_order_revenue
+        description: '{{ doc("core_customers__sum_order_revenue") }}'
+      - name: is_true_canadian
+        description: '{{ doc("core_customers__is_true_canadian") }}'

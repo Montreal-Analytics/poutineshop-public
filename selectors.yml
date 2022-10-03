@@ -1,0 +1,9 @@
+selectors:
+  - name: include_fulfilment_models
+    description: Run models that are relevant to the fulfilment team.
+    definition:
+      union:
+        - method: fqn
+          value: dim_customers
+        - method: fqn
+          value: fct_orders

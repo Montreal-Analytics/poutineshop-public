@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: stg_ecommerce_backend__inventory_items
+    description: '{{ doc("stg_ecommerce_backend__inventory_items") }}'
+    columns:
+      - name: inventory_item_id
+        description: '{{ doc("ecommerce_backend__inventory_item_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: '{{ doc("ecommerce_backend__product_id") }}'
+        tests:
+          - not_null
+      - name: created_at
+        description: '{{ doc("ecommerce_backend__created_at") }}'
+      - name: sold_at
+        description: '{{ doc("ecommerce_backend_inventory_items__sold_at") }}'
+      - name: cost
+        description: '{{ doc("ecommerce_backend_inventory_items__cost") }}'
+      - name: product_category
+        description: '{{ doc("ecommerce_backend_products__category") }}'
+      - name: product_name
+        description: '{{ doc("ecommerce_backend_products__name") }}'
+      - name: product_brand
+        description: '{{ doc("ecommerce_backend_products__brand") }}'
+      - name: product_retail_price
+        description: '{{ doc("ecommerce_backend_products__retail_price") }}'
+      - name: product_department
+        description: '{{ doc("ecommerce_backend_products__department") }}'
+      - name: product_sku
+        description: '{{ doc("ecommerce_backend_products__sku") }}'
+        tests:
+          - not_null
+      - name: product_distribution_center_id
+        description: '{{ doc("ecommerce_backend__distribution_center_id") }}'

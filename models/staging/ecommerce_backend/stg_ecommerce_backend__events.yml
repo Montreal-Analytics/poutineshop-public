@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: stg_ecommerce_backend__events
+    config:
+      tags: "contains_pii"
+    description: '{{ doc("stg_ecommerce_backend__events") }}'
+    columns:
+      - name: event_id
+        description: '{{ doc("ecommerce_backend__event_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: sequence_number
+        description: '{{ doc("ecommerce_backend_events__sequence_number") }}'
+        tests:
+          - not_null
+      - name: session_id
+        description: '{{ doc("ecommerce_backend_events__session_id") }}'
+        tests:
+          - not_null
+      - name: created_at
+        description: '{{ doc("ecommerce_backend__created_at") }}'
+      - name: ip_address
+        description: '{{ doc("ecommerce_backend__ip_address") }}'
+      - name: city
+        description: '{{ doc("ecommerce_backend__city") }}'
+      - name: state
+        description: '{{ doc("ecommerce_backend__state") }}'
+      - name: country
+        description: '{{ doc("ecommerce_backend__country") }}'
+      - name: zip
+        description: '{{ doc("ecommerce_backend__zip") }}'
+      - name: latitude
+        description: '{{ doc("ecommerce_backend__latitude") }}'
+      - name: longitude
+        description: '{{ doc("ecommerce_backend__longitude") }}'
+      - name: os
+        description: '{{ doc("ecommerce_backend__os") }}'
+      - name: browser
+        description: '{{ doc("ecommerce_backend__browser") }}'
+      - name: traffic_source
+        description: '{{ doc("ecommerce_backend_events__traffic_source") }}'
+      - name: user_id
+        description: '{{ doc("ecommerce_backend__user_id") }}'
+      - name: uri
+        description: '{{ doc("ecommerce_backend_events__uri") }}'
+      - name: event_type
+        description: '{{ doc("ecommerce_backend_events__event_type") }}'

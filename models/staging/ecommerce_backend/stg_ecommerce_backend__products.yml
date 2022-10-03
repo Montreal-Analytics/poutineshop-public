@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_ecommerce_backend__products
+    description: '{{ doc("stg_ecommerce_backend__products") }}'
+    columns:
+      - name: product_id
+        description: '{{ doc("ecommerce_backend__product_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: cost
+        description: '{{ doc("ecommerce_backend_products__cost") }}'
+      - name: category
+        description: '{{ doc("ecommerce_backend_products__category") }}'
+      - name: name
+        description: '{{ doc("ecommerce_backend_products__name") }}'
+      - name: brand
+        description: '{{ doc("ecommerce_backend_products__brand") }}'
+      - name: retail_price
+        description: '{{ doc("ecommerce_backend_products__retail_price") }}'
+      - name: department
+        description: '{{ doc("ecommerce_backend_products__department") }}'
+      - name: sku
+        tests:
+          - unique
+          - not_null
+        description: '{{ doc("ecommerce_backend_products__sku") }}'
+      - name: distribution_center_id
+        description: '{{ doc("ecommerce_backend__distribution_center_id") }}'
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ecommerce_backend__distribution_centers')
+              field: distribution_center_id

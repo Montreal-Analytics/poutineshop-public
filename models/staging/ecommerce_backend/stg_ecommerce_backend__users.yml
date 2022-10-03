@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: stg_ecommerce_backend__users
+    config:
+      tags: "contains_pii"
+    description: '{{ doc("stg_ecommerce_backend__users") }}'
+    columns:
+      - name: user_id
+        description: '{{ doc("ecommerce_backend__user_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: '{{ doc("ecommerce_backend_users__first_name") }}'
+      - name: last_name
+        description: '{{ doc("ecommerce_backend_users__last_name") }}'
+      - name: email
+        description: '{{ doc("ecommerce_backend_users__email") }}'
+        tests:
+          - not_null
+      - name: age
+        description: '{{ doc("ecommerce_backend_users__age") }}'
+      - name: city
+        description: '{{ doc("ecommerce_backend__city") }}'
+      - name: state
+        description: '{{ doc("ecommerce_backend__state") }}'
+      - name: country
+        description: '{{ doc("ecommerce_backend__country") }}'
+      - name: zip
+        description: '{{ doc("ecommerce_backend__zip") }}'
+      - name: latitude
+        description: '{{ doc("ecommerce_backend__latitude") }}'
+      - name: longitude
+        description: '{{ doc("ecommerce_backend__longitude") }}'
+      - name: gender
+        description: '{{ doc("ecommerce_backend__gender") }}'
+      - name: created_at
+        description: '{{ doc("ecommerce_backend__created_at") }}'
+      - name: traffic_source
+        description: '{{ doc("ecommerce_backend_users__traffic_source") }}'

@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_production__shops
+    description: '{{ doc("stg_production__shops") }}'
+    columns:
+      - name: shop_id
+        description: '{{ doc("production__shop_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: shop_address
+        description: '{{ doc("production_shops__address") }}'
+      - name: shop_city
+        description: '{{ doc("production_shops__city") }}'
+      - name: shop_province
+        description: '{{ doc("production_shops__province") }}'
+      - name: shop_country
+        description: '{{ doc("production_shops__country") }}'
+      - name: shop_postal_code
+        description: '{{ doc("production_shops__postal_code") }}'
+      - name: shop_latitude
+        description: '{{ doc("production_shops__latitude") }}'
+      - name: shop_longitude
+        description: '{{ doc("production_shops__longitude") }}'

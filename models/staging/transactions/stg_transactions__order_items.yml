@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: stg_transactions__order_items
+    description: '{{ doc("stg_transactions__order_items") }}'
+    columns:
+      - name: order_item_unique_sk
+        description: >
+          '{{ doc("transactions_orders_items__order_item_unique_sk") }}'
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: '{{ doc("transactions__order_id") }}'
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_transactions__orders')
+              field: order_id
+      - name: product_id
+        description: '{{ doc("production__product_id") }}'
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_production__products')
+              field: product_id
+      - name: customer_id
+        description: '{{ doc("production__customer_id") }}'
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_production__customers')
+              field: customer_id
+      - name: quantity
+        description: '{{ doc("transactions_orders__quantity") }}'
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">0"
+      - name: product_name
+        description: Name of order item
+      - name: unit_price
+        description: '{{ doc("transactions_orders_items__unit_price") }}'
+      - name: price
+        description: '{{ doc("transactions_orders_items__price") }}'
+      - name: order_created_at
+        description: '{{ doc("transactions_orders__created_at") }}'

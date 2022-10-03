@@ -1,0 +1,17 @@
+version: 2
+
+seeds:
+  - name: product_category_and_price_mapping
+    description: a manual mapping of product ids to their category and price multiplier
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+      - name: category
+        tests:
+          - not_null
+      - name: price_multiplier
+        description: '{{ doc("core_products__price_multiplier") }}'
+        tests:
+          - not_null

@@ -1,0 +1,74 @@
+# These are base configs for dbt.
+# You probably won't need to change these!
+name: 'poutine_shop'
+version: '1.0.0'
+config-version: 2
+profile: 'poutine_shop'
+model-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+seed-paths: ["data"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+target-path: "target"
+packages-install-path: "dbt_packages"
+clean-targets: ["target", "dbt_packages"]
+
+# Add a dynamic query comment providing context of execution
+query-comment:
+  comment: "{{ query_comment(node) }}"
+  append: true
+
+# Require dbt 1.0.0+
+require-dbt-version: [">=1.2.0", "<1.3.0"]
+
+# Variables
+vars:
+  util_days_start_date: "1970-01-01"
+
+  true_canadian_order_treshold: 10
+  true_canadian_revenue_treshold: 100
+
+# Hooks
+# In dbt 0.20+ there are hooks to grant all type of access
+# Advantage: Allow custom macro config
+on-run-end:
+  # Grant usage to both our Looker and Sigma instances
+  - "{{ grant_usage_on_schemas(schemas, 'LOOKER_ROLE') }}"
+  - "{{ grant_usage_on_schemas(schemas, 'SIGMA_ROLE') }}"
+
+# Models
+models:
+  poutine_shop:
+    marts:
+      # Grant select to both our Looker and Sigma instances
+      # In dbt 1.2+ there is an easy-to-use grant config for provisioning access
+      # Acts similar to the post_hook below except post-book is more flexible
+      +grants:
+        select: ['LOOKER_ROLE', 'SIGMA_ROLE']
+
+      # Default materialization of marts should be tables
+      +materialized: table
+
+      # Persist the table and column descriptions to Snowflake DW
+      +persist_docs:
+        relation: true
+        columns: true
+
+      # Grant select to both our Looker and Sigma instances
+      # In dbt 0.20+ there are hooks to grant all type of access
+      # Advantage: Allow custom macro config
+      +post-hook:
+        - "{{ grant_select('SIGMA_ROLE') }}"
+        - "{{ grant_select('LOOKER_ROLE') }}"
+
+      core:
+        +schema: core
+
+    staging:
+      # Default materialization of staging should be views
+      +materialized: view
+
+    utils:
+      # Default materialization of utils should be tables
+      +materialized: table

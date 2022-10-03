@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_production__products
+    description: '{{ doc("stg_production__products") }}'
+    columns:
+      - name: product_id
+        description: '{{ doc("production__product_id") }}'
+        tests:
+          - not_null
+          - unique
+      - name: product_price
+        description: '{{ doc("production_products__product_price") }}'
+      - name: product_description
+        description: >
+          '{{ doc("production_products__product_description") }}'
+      - name: product_size
+        description: '{{ doc("production_products__product_size") }}'
+      - name: product_type
+        description: '{{ doc("production_products__product_type") }}'

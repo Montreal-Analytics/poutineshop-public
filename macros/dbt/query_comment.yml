@@ -1,0 +1,28 @@
+version: 2
+
+macros:
+  - name: query_comments
+    description: >
+      This macro must be used in conjunction with the query_comment feature
+      of dbt.
+      cf. https://docs.getdbt.com/reference/project-configs/query-comment
+
+      The following snippet must be present in dbt_project.yml:
+
+      ```
+      query-comment:
+        comment: "{{ query_comment(node) }}"
+        append: true
+      ```
+
+      The append parameter is best set to `true` as some databases such as
+      Snowflake strips out the first comment from history logs for security
+      reasons. This parameter ensures the query comment is appended at the
+      bottom of the SQL query.
+    docs:
+      show: false
+    arguments:
+      - name: node
+        type: string
+        description: >
+          The argument _must_ be the `node` context.

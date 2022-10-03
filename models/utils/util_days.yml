@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: util_days
+    description: >
+      This model provides a date spine starting from the start date configured
+      in dbt_project.yml and ending a day after the current date.
+    columns:
+      - name: date_day
+        description: The date day
+        tests:
+          - unique
+          - not_null

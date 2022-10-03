@@ -1,0 +1,17 @@
+# dbt
+target/
+dbt_modules/
+logs/
+dbt_packages/
+
+# virtual env
+venv/
+env/
+dbt-env/
+.dbtenv/
+
+# mac
+.DS_Store
+
+#ide
+.idea/

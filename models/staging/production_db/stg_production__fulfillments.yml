@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_production__fulfillments
+    description: '{{ doc("stg_production__fulfillments") }}'
+    columns:
+      - name: fulfillment_event_id
+        description: '{{ doc("ecommerce_backend__event_id") }}'
+        tests:
+          # - unique TODO Look into uniqueness issue
+          - not_null
+      - name: order_id
+        description: '{{ doc("transactions__order_id") }}'
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_transactions__orders')
+              field: order_id
+      - name: customer_id
+        description: '{{ doc("production__customer_id") }}'
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_production__customers')
+              field: customer_id
+      - name: created_at
+        description: '{{ doc("transactions_orders__created_at") }}'
+      - name: event_name
+        description: '{{ doc("production_fulfillments__event_name") }}'
+        tests:
+          - accepted_values:
+              values:
+                - order_packaged
+                - order_shipped
+                - order_delivered

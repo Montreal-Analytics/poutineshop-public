@@ -1,0 +1,25 @@
+version: 2
+
+analyses:
+  - name: ad_hoc__most_valuable_customer
+    description: >
+      Each user id has a first purchase order date, recent purchase order date,
+      total lifetime order placed, total lifetime revenue.
+    config:
+      tags: analysis
+    columns:
+      - name: user_id
+        description: '{{ doc("ecommerce_backend__user_id") }}'
+      - name: first_purchase_at
+        description: The date on which the user made his/her first purchase
+      - name: recent_purchase_at
+        description: The date on which the user made his/her recent purchase
+      - name: total_lifetime_order_placed
+        description: >
+          The total order placed by user throughout his/her lifetime as a
+          customer.
+      - name: total_lifetime_revenue_from_user
+        description: >
+          The sum of total expense a user made throughout his/her lifetime
+          as a customer. From a company perspective, it's the total lifetime
+          revenue from each user.

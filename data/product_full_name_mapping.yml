@@ -1,0 +1,11 @@
+version: 2
+
+seeds:
+  - name: product_full_name_mapping
+    description: a manual mapping of product full name to product id
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+      - name: product_name

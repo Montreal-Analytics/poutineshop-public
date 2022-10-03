@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: >
+      One row per product available in the Poutine Shop
+    columns:
+      - name: product_id
+        description: product unique identifier
+        tests:
+          - not_null
+          - unique
+      - name: product_price
+        description: '{{ doc("production_products__product_price") }}'
+      - name: product_category
+        description: '{{ doc("ecommerce_backend_products__category") }}'
+      - name: product_name
+        description: '{{ doc("ecommerce_backend_products__name") }}'
+      - name: product_retail_price
+        description: '{{ doc("ecommerce_backend_products__retail_price") }}'
+      - name: price_multiplier
+        description: '{{ doc("core_products__price_multiplier") }}'
+      - name: product_description
+        description: Description of product
+      - name: product_size
+        description: Size of product
+      - name: product_type
+        description: Type of product
+      - name: total_unique_buyers
+        description: The number of unique customers who bought this product
+      - name: total_units_sold
+        description: total number of units sold for the product
+      - name: total_product_revenue
+        description: total amount sold for the product
+      - name: product_first_order_at
+        description: >
+          The date and time when the product was order the very first time
+      - name: product_recent_order_at
+        description: >
+          The date and time of the most recent purchase of the product
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= product_first_order_at"
+      - name: total_units_sold_rank
+        description: >
+          Rank based on the total units sold. Rank will be 1 for products that
+          sold the most units
+      - name: total_product_revenue_rank
+        description: '{{ doc("core_products__total_product_revenue_rank") }}'
+      - name: product_category
+        description: '{{ doc("core_products__product_category") }}'
+      - name: price_multiplier
+        description: '{{ doc("core_products__price_multiplier") }}'
+      - name: product_retail_price
+        description: '{{ doc("core_products__product_retail_price") }}'
+      - name: product_retail_price_with_tax
+        description: '{{ doc("core_products__product_retail_price_with_tax") }}'

@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_ecommerce_backend__distribution_centers
+    description: '{{ doc("stg_ecommerce_backend__distribution_centers") }}'
+    columns:
+      - name: distribution_center_id
+        description: '{{ doc("ecommerce_backend__distribution_center_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: >
+          '{{ doc("ecommerce_backend_distribution_centers__name") }}'
+      - name: latitude
+        description: '{{ doc("ecommerce_backend__latitude") }}'
+      - name: longitude
+        description: '{{ doc("ecommerce_backend__longitude") }}'

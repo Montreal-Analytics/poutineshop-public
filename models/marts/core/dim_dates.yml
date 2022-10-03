@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: dim_dates
+    description: >
+      This model provides a date spine starting from the start date configured
+      in dbt_project.yml and ending a day after the current date.
+    columns:
+      - name: date_day
+        description: TODO
+        tests:
+          - not_null
+          - unique

@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: >
+      '{{ doc("fct_orders") }}'
+
+      TODO: add fulfillment details, currently this table only includes order
+      item purchase
+    columns:
+      - name: orders_sk
+        description: '{{ doc("core_orders__orders_sk") }}'
+        tests:
+          - not_null
+          - unique
+      - name: order_item_unique_sk
+        description: '{{ doc("core_orders__order_item_unique_sk") }}'
+      - name: order_id
+        description: '{{ doc("transactions__order_id") }}'
+      - name: product_id
+        description: '{{ doc("production__product_id") }}'
+      - name: customer_id
+        description: '{{ doc("production__customer_id") }}'
+      - name: shop_id
+        description: '{{ doc("production__shop_id") }}'
+      - name: quantity
+        description: '{{ doc("transactions_orders__quantity") }}'
+      - name: unit_price
+        description: '{{ doc("transactions_orders_items__unit_price") }}'
+      - name: price
+        description: '{{ doc("transactions_orders_items__price") }}'
+      - name: order_created_at
+        description: '{{ doc("transactions_orders__created_at") }}'

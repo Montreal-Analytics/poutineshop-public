@@ -1,0 +1,60 @@
+version: 2
+
+sources:
+  - name: transactions
+    database: poutineshop_raw_db
+    description: Data from production including orders and order items
+    freshness:
+      warn_after: {count: 48, period: hour}
+    tables:
+      - name: orders
+        description: A table of order information, including cost
+        columns:
+          - name: customer_id
+            description: Customer unique id
+            tests:
+              - not_null
+          - name: quantity
+            description: Number of goods
+          - name: subtotal
+            description: Subtotal of goods without tax
+          - name: tax
+            description: Tax amount
+          - name: total
+            tests:
+              - dbt_utils.expression_is_true:
+                  expression: "= subtotal + tax"
+            description: Total amount (Subtotal + Tax)
+          - name: order_id
+            description: Unique order id; this has duplicates in the raw data
+            tests:
+              - not_null
+          - name: created_at
+            description: Created at date
+          - name: shop_id
+            description: |
+              Unique identifier for the shop that the order was placed.
+            tests:
+              - not_null
+
+      - name: order_items
+        description: A table of products and their cost
+        columns:
+          - name: product_id
+            description: Unique product id
+            tests:
+              - not_null
+          - name: quantity
+            description: Number of product
+          - name: customer_id
+            description: Unique customer id
+          - name: name
+            description: Name of order item
+          - name: cost
+            description: Cost of product
+          - name: subtotal
+            description: Subtotal without tax
+          - name: order_id
+            description: Unique order id
+          - name: created_at
+            description: Created at date

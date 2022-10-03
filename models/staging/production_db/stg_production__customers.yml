@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: stg_production__customers
+    config:
+      tags: "contains_pii"
+    description: '{{ doc("stg_production__customers") }}'
+    columns:
+      - name: customer_id
+        description: '{{ doc("production__customer_id") }}'
+        tests:
+          - not_null
+          - unique
+      - name: customer_name
+        description: '{{ doc("production_customers__customer_name") }}'
+      - name: customer_birth_date
+        description: >
+          '{{ doc("production_customers__customer_birth_date") }}'
+      - name: customer_city
+        description: '{{ doc("production_customers__customer_city") }}'
+      - name: customer_state
+        description: '{{ doc("production_customers__customer_state") }}'
+      - name: customer_zip_code
+        description: >
+          '{{ doc("production_customers__customer_zip_code") }}'
+      - name: customer_phone_number
+        description: >
+          '{{ doc("production_customers__customer_phone_number") }}'
+      - name: customer_email
+        description: '{{ doc("production_customers__customer_email") }}'
+      - name: customer_gender
+        description: '{{ doc("production_customers__customer_gender") }}'
