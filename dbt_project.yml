@@ -29,24 +29,11 @@ vars:
   true_canadian_order_treshold: 10
   true_canadian_revenue_treshold: 100
 
-# Hooks
-# In dbt 0.20+ there are hooks to grant all type of access
-# Advantage: Allow custom macro config
-on-run-end:
-  # Grant usage to both our Looker and Sigma instances
-  - "{{ grant_usage_on_schemas(schemas, 'LOOKER_ROLE') }}"
-  - "{{ grant_usage_on_schemas(schemas, 'SIGMA_ROLE') }}"
 
 # Models
 models:
   poutine_shop:
     marts:
-      # Grant select to both our Looker and Sigma instances
-      # In dbt 1.2+ there is an easy-to-use grant config for provisioning access
-      # Acts similar to the post_hook below except post-book is more flexible
-      +grants:
-        select: ['LOOKER_ROLE', 'SIGMA_ROLE']
-
       # Default materialization of marts should be tables
       +materialized: table
 
@@ -54,13 +41,6 @@ models:
       +persist_docs:
         relation: true
         columns: true
-
-      # Grant select to both our Looker and Sigma instances
-      # In dbt 0.20+ there are hooks to grant all type of access
-      # Advantage: Allow custom macro config
-      +post-hook:
-        - "{{ grant_select('SIGMA_ROLE') }}"
-        - "{{ grant_select('LOOKER_ROLE') }}"
 
       core:
         +schema: core
